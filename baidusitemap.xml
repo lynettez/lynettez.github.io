@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/06/30/%E5%86%A5%E6%83%B3%E7%BB%83%E4%B9%A0/</loc>
+    <lastmod>2018-06-30T01:00:07.319Z</lastmod>
+    <data>
+        <display>
+        <title>冥想练习</title>
+        <pubTime>2018-06-30T00:31:21.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Life Itself" url="http://yoursite.com/categories/Life-Itself/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/06/30/Android-VTS-V8-0/</loc>
+    <lastmod>2018-06-30T00:59:27.240Z</lastmod>
+    <data>
+        <display>
+        <title>Android VTS V8.0</title>
+        <pubTime>2018-06-30T00:43:45.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Android" url="http://yoursite.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/06/18/Android-HIDL-Java/</loc>
+    <lastmod>2018-06-18T05:43:36.457Z</lastmod>
+    <data>
+        <display>
+        <title>Android HIDL (Java)</title>
+        <pubTime>2018-06-18T04:20:33.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Android" url="http://yoursite.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/06/18/Start-with-Hexo/</loc>
+    <lastmod>2018-06-18T04:16:16.762Z</lastmod>
+    <data>
+        <display>
+        <title>Start with Hexo</title>
+        <pubTime>2018-06-18T03:12:25.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Hexo" url="http://yoursite.com/categories/Hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+</urlset>
