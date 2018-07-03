@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Lynette&#39;s Blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2018-07-03T02:38:06.993Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Lynette Zhao</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android VTS V8.0</title>
+    <link href="http://yoursite.com/2018/06/30/Android-VTS-V8-0/"/>
+    <id>http://yoursite.com/2018/06/30/Android-VTS-V8-0/</id>
+    <published>2018-06-30T00:43:45.000Z</published>
+    <updated>2018-07-03T02:38:06.993Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h3><p>Android Vendor Test Suite 包含三部分： VTS， VTS-*， VTI</p><p><em>VTS</em></p><blockquote><p>VTS 是Android Vendor 接口的一致性测试套件， Android Vendor接口即VINTF， 它相应的Object Data 被定义在device manifest 中. Refer to VINTF Object Data Link</p></blockquote><p><em>VTS-</em> *</p><blockquote><p>VTS- 包括可选的非功能测试和测试用例开发工具。<br>VTS 和 VTS- 有一组测试用例， 用于直接在VINTF下测试一下组件：<br>HAL modules，Vendor native libraries(e.g., Vendor NDK. shortly VNDK), OS (i.e., Linux kernel)</p></blockquote><p><em>VTI</em></p><blockquote><p>Vendor Test Infrastructure(VTI) 是一套基于云的基础框架，作用是允许Android设备合作伙伴可以轻松创建一个基于云的持续的VTS测试集成服务。</p></blockquote><hr><h3 id="编译和运行一个VTS-Test-Plan"><a href="#编译和运行一个VTS-Test-Plan" class="headerlink" title="编译和运行一个VTS Test Plan"></a>编译和运行一个VTS Test Plan</h3><p><em>搭建测试环境</em></p><ul><li>64-bit Ubuntu Linux</li><li>Java 8</li><li>Python 2.7</li><li>ADB 1.0.39 adb 一定要 必须要更新 link</li></ul><p>下面下载项，<strong> 一个都不要缺</strong>！！</p><p>Python development kit：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-dev</span><br></pre></td></tr></table></figure><p>Protocol Buffer tools：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-protobuf</span><br><span class="line">sudo apt-get install protobuf-compiler</span><br></pre></td></tr></table></figure><p>Python virtual environment-related tools:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-virtualenv</span><br><span class="line">sudo apt-get install python-pip</span><br></pre></td></tr></table></figure><p>并且要确保linux主机可以用过adb shell 连接到你的Android测试设备</p><p>完成以上工作就可以 编译 VTS 包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">. build/envsetup.sh</span><br><span class="line">lunch aosp_arm64-userdebug</span><br><span class="line">make vts -j</span><br></pre></td></tr></table></figure></p><p>如果你有整套的Android 源码，可以直接croot下运行make vts</p><p>运行 VTS 测试：<br>进入你make出的out 路径并解压，就可以得到一个可执行文件 vts-tradefed。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vts-tradefed</span><br><span class="line">run vts     // where vts is the test plan name</span><br></pre></td></tr></table></figure></p><p>常用的命令：</p><ul><li>run vts //运行默认的vts测试项</li><li>run vts-hal //运行默认的vts hal测试项</li><li>run vts-kernel //运行默认的vts kernel 测试项</li><li>run vts -m &lt;测试模块&gt; //运行特殊的测试模块</li><li>run vts -s &lt;设备串口&gt; //连接多设备时使用</li></ul><p>Windows 下运行VTS测试， 可参考<a href="https://codelabs.developers.google.com/codelabs/android-vts/#1" target="_blank" rel="noopener">Link</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;组成&quot;&gt;&lt;a href=&quot;#组成&quot; class=&quot;headerlink&quot; title=&quot;组成&quot;&gt;&lt;/a&gt;组成&lt;/h3&gt;&lt;p&gt;Android Vendor Test Suite 包含三部分： VTS， VTS-*， VTI&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;VTS&lt;/em&gt;&lt;/
+      
+    
+    </summary>
+    
+      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>冥想练习</title>
+    <link href="http://yoursite.com/2018/06/30/%E5%86%A5%E6%83%B3%E7%BB%83%E4%B9%A0/"/>
+    <id>http://yoursite.com/2018/06/30/冥想练习/</id>
+    <published>2018-06-30T00:31:21.000Z</published>
+    <updated>2018-07-03T02:38:30.008Z</updated>
+    
+    <content type="html"><![CDATA[<p>Meditate 冥想<br>没有任何宗教的概念，提升幸福感的一种好的方式。</p><hr><p>我们的意识，每天都在不停的思考，做出反应，提出计划，给出判断，还会有不切实际的幻想，对未知未来的联想， 等等… 作为普通人的我们，除了生理疼痛的时候，很少会把意识集中在自己身上，很少去观察现在这个时候的自己。如果我们把感知放大，去感受当下真实发生的让人开心的事情，你就会发现，我们的小确幸才是我们已经得到的真实的宝藏。</p><p>冥想就是让人感受当下真实的美好， 抓住真实的幸福。<br>尝试过冥想的同学一定会感受到，我们的思维真的很难控制，很难专心的感受呼吸，或者专心的去想那根蜡烛，思绪一定会调皮的想着一会吃什么，或者回忆与某人的对话，等等…</p><p>冥想其实也可以让我们练习如何专注于一件事，这就是为什么有些提高注意力的课程会教你如何冥想的原因。个人感觉确实有点效果，真实的体验，之前coding的时候必须要听一些很嗨的rap，越嗨越有劲头，现在真的会觉得吵了… 只好选择一些轻音乐，之前从来都不会听的轻音乐…</p><p>说到这里 想推荐大家 Calm , 有网页版的，也有app。没有特殊需要就不用花钱买课程，用facebook login之后，就可以在首页选择不同的背景，每个动态背景&gt;都配有相应的声音或者轻音乐。比如海浪声，下雨声， 烧柴声，我自己真的超享受。各种ASMR，一定有一个是你自己的ASMR。</p><p>决定要冥想， 但不知道如何正确的冥想，建议先读：<strong> 初学者的冥想书</strong> by Kornfield J. 我是边学习边调整的，相信只要每天坚持就一定有所收获</p><p>下面算是这本书的提炼，主要是把当时觉得很有帮助的point列出来，方便回顾。</p><hr><ul><li>冥想练习有很多种，选择最适合你的，有助于你发展对内心，意识，身体和感受的察觉，才是最好的冥想练习</li><li>作出选择之后，重在坚持，坚持每天冥想，选择你最喜欢的清晨或者傍晚，坚持静坐十五分钟或者你喜欢的时间长短</li><li>所有事物都处在变化的过程中，不妨跟随这种改变，接纳事物的不确定性。在冥想中学者去理解并信任无常的法则</li><li>冥想是为了洞悉生命的法则。在冥想中，我们不断将注意力从奔腾不息的思维和念头上拉回，转而放在身体与感觉之上</li></ul><hr><h3 id="冥想练习之-观呼吸"><a href="#冥想练习之-观呼吸" class="headerlink" title="冥想练习之 观呼吸"></a>冥想练习之 观呼吸</h3><ul><li>首先，找一个你觉得安稳，舒服，放松的姿势，没有压力的坐直，端庄一些，但无需苛求自己</li><li>微微沉肩，让手臂自然下垂，手垂在衣服下摆或膝盖上，保持脊背挺直的同时又能放松</li><li>若哪里不舒服，活动一下也无妨；闭上眼睛，或微微张开 看着地板即可</li><li>将注意力带到此刻，留心周围的环境和声音，去察觉你的身体有什么感受</li><li>观呼吸引导我们察觉呼吸正在发生这一事实，体验自然的呼吸，初期会感觉呼吸变得很紧，很不自然，这很常见，只要放轻松，如果还有紧迫感存在，不妨轻轻松松的面对它</li><li>在静坐初期，心念会如瀑布，你能做的就是，一旦察觉自己陷入思考，计划或回忆中，就给这个念头起个名字“计划”，“回忆”… 并任这个念头离开，回到呼吸上</li><li>要记得心念总是偏离呼吸到别的事情上是非常常见的，不必评判自己这样做不对，只要抹去念头回到呼吸上即可</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Meditate 冥想&lt;br&gt;没有任何宗教的概念，提升幸福感的一种好的方式。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;我们的意识，每天都在不停的思考，做出反应，提出计划，给出判断，还会有不切实际的幻想，对未知未来的联想， 等等… 作为普通人的我们，除了生理疼痛的时候，很少会把意识集中在自己
+      
+    
+    </summary>
+    
+      <category term="Life Itself" scheme="http://yoursite.com/categories/Life-Itself/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android HIDL (Java)</title>
+    <link href="http://yoursite.com/2018/06/18/Android-HIDL-Java/"/>
+    <id>http://yoursite.com/2018/06/18/Android-HIDL-Java/</id>
+    <published>2018-06-18T04:20:33.000Z</published>
+    <updated>2018-07-03T02:50:13.862Z</updated>
+    
+    <content type="html"><![CDATA[<pre><code>HAL接口定义语言或HIDL（发音为“hide-l”）是一种接口描述语言（IDL），用于指定HAL与其用户之间的接口。 它允许指定类型和方法调用，并将其收集到接口和包中。 更广泛地说，HIDL是可以独立编译的代码库之间进行通信的系统。HIDL旨在用于进程间通信（IPC）。</code></pre><p>以上是来自Android官方文档。学习或者尝试使用过HIDL的coder一定都看过<a href="https://source.android.google.cn/devices/architecture/hidl/" target="_blank" rel="noopener">Android HIDL</a>，所以都会了解到，定义了HIDL接口之后，我们可以用C++和JAVA两种方式去写HIDL接口的实现，大多数的HIDL接口都会用C++去写接口的具体实现，并通过.rc文件来start接口服务，这种实现方式很通用，官网和许多博客有具体介绍，如果你需要在native层写接口实现，那可以移步google去搜索一下。</p><p>而JAVA实现方式，一是官网没有特别具体的介绍，二是很少有这种需求也很少有博主用过这种方式，而我在工作中恰好有这样一个需求：  就是要通过HIDL的JAVA实现server端，从而把Android framework的API暴露给native层。<br>经过一番尝试终于实现了需求，所以想要通过这篇博文记录一下自己的收获和实现过程中遇到的问题。</p><hr><h3 id="定义接口文件"><a href="#定义接口文件" class="headerlink" title="定义接口文件"></a>定义接口文件</h3><p>首先根据官方文档提供的格式写好自己的.hal接口文件，并通过hild-gen生成相应的Android.bp 和 Android.mk文件。<br>两个文件会相应build出很重要的C++和JAVA的Shared Library，这两个库是供服务端和客户算使用的。</p><ul><li>这里我曾遇到的问题是Android.bp有问题，build不出相应的C++的Shared Library。<ul><li>解决办法是修改/interfaces/下面的所有Android.bp，确保他们都加了你的新接口的路径（eg. myinterface/1.0），只要有一层缺了该路径，就会导致build不出你要的C++ Library.</li></ul></li></ul><p>如果运行hile-gen时，显示error找不到command， 需要先在/system/tools/下 运行</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m hidl-gen</span><br></pre></td></tr></table></figure><hr><h3 id="JAVA-接口的实现"><a href="#JAVA-接口的实现" class="headerlink" title="JAVA 接口的实现"></a>JAVA 接口的实现</h3><p>用JAVA实现接口，有点类似于AIDL的借口实现，我们需要实现一个服务端apk，并在Android开机启动时保证成功调起接口的服务，以便各个客户端使用。</p><ul><li>首先有了相应的.bp和.mk文件，就可以得到相应的C++ 和 JAVA的Library，我们需要在JAVA server apk 的makefile 中引入Java library，</li><li><p>其次，server端必须要有一个一直在运行的进程在，所以我们需要一个activity或者service进程来承载整个server端，并且需要在监听到开机广播后启用它，并完成工作：registerAsService() //让我们定义的接口的HwService注册到HwServiceManager中</p><ul><li><p>类似于AIDL，我们同样需要实现类MyInterface extends IMyInterface.Stub，之后Override所有接口方法并实现具体的function。下面是registerAsService()具体例子：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MyInterface testService = <span class="keyword">new</span> MyInterface();</span><br><span class="line">testService.registerAsService(<span class="string">"MyTestService"</span>);</span><br></pre></td></tr></table></figure></li><li><p>这里遇到过的问题是Service注册之后 client端偶尔会得到空的Service。因为当时只是试验，所以就随意的在service.onStartCommand()中加了上面两行代码。 解决办法就是要把MyInterface的对象作为Service的成员变量，这样就不会偶尔被回收了…</p></li></ul></li><li><p>第三，修改 DEVICE MANIFEST 和 SELINUX POLICY。只有修改过这两项，你的service才允许被注册到HwServiceManager中。Device Manifest 可以参考 <a href="https://source.android.google.cn/devices/architecture/vintf/objects" target="_blank" rel="noopener">VINTF Object Data Link</a>用相同的格式声明你自己的接口。如果你用C++实现server端这一条同样需要被执。</p><ul><li>关于SELinux 就不具体介绍了，可以根据相应的SELinux denial logs来修改你的SELinux policy。在这之前可以用下面的命令行跳过SELinux 的拦截。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell setenforce 0</span><br></pre></td></tr></table></figure></li></ul></li></ul><hr><h3 id="CLIENT-端测试"><a href="#CLIENT-端测试" class="headerlink" title="CLIENT 端测试"></a>CLIENT 端测试</h3><p>Client端不区分JAVA实现的还是C++实现的接口。Client端实现很简单，算是HIDL的优点之一，只要调用</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IMyInterface.getService(<span class="string">"MyTestService"</span>) <span class="comment">//JAVA</span></span><br><span class="line">IMyInterface::getService(<span class="string">"MyTestService"</span>) <span class="comment">//C++</span></span><br></pre></td></tr></table></figure><p>JAVA Client端同时也需要引用JAVA Library。如果有相应的Callback， 需要像AIDL一样在Client端有一个Callback类 extends ICallback.Stub.</p><p>C++ 的Client端 同样的需要加C++的Shared Library.</p><hr><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过HIDL JAVA server端封装某些framework API，native层就可以通过HIDL接口调用相应的方法，从而调用到framework API了，除了缩短升级时间的优点，就这一个功能也是非常有用的。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;pre&gt;&lt;code&gt;HAL接口定义语言或HIDL（发音为“hide-l”）是一种接口描述语言（IDL），用于指定HAL与其用户之间的接口。 它允许指定类型和方法调用，并将其收集到接口和包中。 更广泛地说，HIDL是可以独立编译的代码库之间进行通信的系统。
+HIDL旨在用于进程间
+      
+    
+    </summary>
+    
+      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Start with Hexo</title>
+    <link href="http://yoursite.com/2018/06/18/Start-with-Hexo/"/>
+    <id>http://yoursite.com/2018/06/18/Start-with-Hexo/</id>
+    <published>2018-06-18T03:12:25.000Z</published>
+    <updated>2018-06-18T04:16:16.762Z</updated>
+    
+    <content type="html"><![CDATA[<p>Some links which could help us to create our own site:</p><p><a href="https://guides.github.com/features/pages/" target="_blank" rel="noopener">How to creat your GitHub Pages</a></p><p><a href="https://hexo.io/zh-tw/docs/index.html" target="_blank" rel="noopener">Hexo Guide</a></p><p><a href="https://www.jianshu.com/p/21d80d5bfca1" target="_blank" rel="noopener">Hexo deployer to your GitHub Pages</a></p><p><a href="https://wizardforcel.gitbooks.io/markdown-simple-world/1.html" target="_blank" rel="noopener">Markdown 编辑器推荐</a></p><p><a href="https://www.jianshu.com/p/c4f65ebe23ad" target="_blank" rel="noopener">Add Disqus comments in Hexo</a></p><hr><p>Commonly used commands:</p><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;My New Post&quot;</span><br></pre></td></tr></table></figure><p>More info: New a post and need you to modify the .md file</p><h3 id="Clean-project"><a href="#Clean-project" class="headerlink" title="Clean project"></a>Clean project</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure><p>More info: Clean some files which was generated by the last operate</p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure><p>More info: Generating</p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure><p>More info: test in local</p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure><p>Don’t forget to fork your repo after hexo d</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Some links which could help us to create our own site:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://guides.github.com/features/pages/&quot; target=&quot;_blank&quot; rel=&quot;no
+      
+    
+    </summary>
+    
+      <category term="Hexo" scheme="http://yoursite.com/categories/Hexo/"/>
+    
+    
+  </entry>
+  
+</feed>
