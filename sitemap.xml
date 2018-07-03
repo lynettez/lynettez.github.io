@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/06/18/Android-HIDL-Java/</loc>
+    
+    <lastmod>2018-07-03T02:50:13.862Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/06/30/%E5%86%A5%E6%83%B3%E7%BB%83%E4%B9%A0/</loc>
     
     <lastmod>2018-07-03T02:38:30.008Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://yoursite.com/2018/06/30/Android-VTS-V8-0/</loc>
     
     <lastmod>2018-07-03T02:38:06.993Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/06/18/Android-HIDL-Java/</loc>
-    
-    <lastmod>2018-06-18T05:43:36.457Z</lastmod>
     
   </url>
   

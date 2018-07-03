@@ -4,6 +4,24 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/06/18/Android-HIDL-Java/</loc>
+    <lastmod>2018-07-03T02:50:13.862Z</lastmod>
+    <data>
+        <display>
+        <title>Android HIDL (Java)</title>
+        <pubTime>2018-06-18T04:20:33.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Android" url="http://yoursite.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/06/30/%E5%86%A5%E6%83%B3%E7%BB%83%E4%B9%A0/</loc>
     <lastmod>2018-07-03T02:38:30.008Z</lastmod>
     <data>
@@ -28,24 +46,6 @@
         <display>
         <title>Android VTS V8.0</title>
         <pubTime>2018-06-30T00:43:45.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Android" url="http://yoursite.com/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/06/18/Android-HIDL-Java/</loc>
-    <lastmod>2018-06-18T05:43:36.457Z</lastmod>
-    <data>
-        <display>
-        <title>Android HIDL (Java)</title>
-        <pubTime>2018-06-18T04:20:33.000Z</pubTime>
         
          
            
