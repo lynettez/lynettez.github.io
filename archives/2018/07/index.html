@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Android VTS V8.0 | Lynette&#39;s Blog</title>
+  <title>Archives: 2018/7 | Lynette&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -61,7 +61,7 @@
 </head>
 
 <!--
-<body class="post-template">
+<body class="home-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -158,103 +158,69 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      
-<section id="intro">
-    <div class="container">
-        <div class="row col-md-offset-2">
-            <div class="col-md-8">
-    			<span class="post-meta">
-      <time datetime="2018-06-30T00:43:45.000Z" itemprop="datePublished">
-          2018-06-30
-      </time>
-    
-</span>
-                <h1>Android VTS V8.0</h1>
+      <!-- ============================ Hero Image =========================== -->
+
+<section id="hero" class="scrollme">
+    <div class="container-fluid element-img" style="background: url(/img/dp_bg.png) no-repeat center center fixed;background-size: cover">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                    <div>
+                        
+                        <h2></h2>
+                        <p></p>
+                        
+                        <h2></h2>
+                        <p></p>
+                        
+
+                    </div>
+                </div>
             </div>
+            <!-- // .col-md-12 -->
         </div>
-        <div class="col-md-8 col-md-offset-2">
-      		<h3 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h3><p>Android Vendor Test Suite 包含三部分： VTS， VTS-*， VTI</p>
-<p><em>VTS</em></p>
-<blockquote>
-<p>VTS 是Android Vendor 接口的一致性测试套件， Android Vendor接口即VINTF， 它相应的Object Data 被定义在device manifest 中. Refer to VINTF Object Data Link</p>
-</blockquote>
-<p><em>VTS-</em> *</p>
-<blockquote>
-<p>VTS- 包括可选的非功能测试和测试用例开发工具。<br>VTS 和 VTS- 有一组测试用例， 用于直接在VINTF下测试一下组件：<br>HAL modules，Vendor native libraries(e.g., Vendor NDK. shortly VNDK), OS (i.e., Linux kernel)</p>
-</blockquote>
-<p><em>VTI</em></p>
-<blockquote>
-<p>Vendor Test Infrastructure(VTI) 是一套基于云的基础框架，作用是允许Android设备合作伙伴可以轻松创建一个基于云的持续的VTS测试集成服务。</p>
-</blockquote>
-<hr>
-<h3 id="编译和运行一个VTS-Test-Plan"><a href="#编译和运行一个VTS-Test-Plan" class="headerlink" title="编译和运行一个VTS Test Plan"></a>编译和运行一个VTS Test Plan</h3><p><em>搭建测试环境</em></p>
-<ul>
-<li>64-bit Ubuntu Linux</li>
-<li>Java 8</li>
-<li>Python 2.7</li>
-<li>ADB 1.0.39 adb 一定要 必须要更新 link</li>
-</ul>
-<p>下面下载项，<strong> 一个都不要缺</strong>！！</p>
-<p>Python development kit：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-dev</span><br></pre></td></tr></table></figure>
-<p>Protocol Buffer tools：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-protobuf</span><br><span class="line">sudo apt-get install protobuf-compiler</span><br></pre></td></tr></table></figure>
-<p>Python virtual environment-related tools:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-virtualenv</span><br><span class="line">sudo apt-get install python-pip</span><br></pre></td></tr></table></figure>
-<p>并且要确保linux主机可以用过adb shell 连接到你的Android测试设备</p>
-<p>完成以上工作就可以 编译 VTS 包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">. build/envsetup.sh</span><br><span class="line">lunch aosp_arm64-userdebug</span><br><span class="line">make vts -j</span><br></pre></td></tr></table></figure></p>
-<p>如果你有整套的Android 源码，可以直接croot下运行make vts</p>
-<p>运行 VTS 测试：<br>进入你make出的out 路径并解压，就可以得到一个可执行文件 vts-tradefed。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vts-tradefed</span><br><span class="line">run vts     // where vts is the test plan name</span><br></pre></td></tr></table></figure></p>
-<p>常用的命令：</p>
-<ul>
-<li>run vts //运行默认的vts测试项</li>
-<li>run vts-hal //运行默认的vts hal测试项</li>
-<li>run vts-kernel //运行默认的vts kernel 测试项</li>
-<li>run vts -m &lt;测试模块&gt; //运行特殊的测试模块</li>
-<li>run vts -s &lt;设备串口&gt; //连接多设备时使用</li>
-</ul>
-<p>Windows 下运行VTS测试， 可参考<a href="https://codelabs.developers.google.com/codelabs/android-vts/#1" target="_blank" rel="noopener">Link</a></p>
-
-            <div class="clearfix"></div>
-            <hr class="nogutter">
-        </div>
-        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
-    
-    <a class="pull-left" href="/2018/07/15/Analyze-the-Process-of-Setting-KeyboardLayout-for-Physical-Keyboard/" style="float: left;">
-        ← Analyze the Process of Setting kl for Physical Keyboard
-    </a>
-    
-    
-    <a class="pull-right" href="/2018/06/30/冥想练习/">
-        冥想练习 →
-    </a>
-    
-</nav>
-
-        <div class="duoshuo">
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-	var disqus_shortname = 'dogbird';
-	window.addEventListener('load', function(){
-		(function(){
-			var dsq = document.createElement('script');
-			dsq.type = 'text/javascript';
-			dsq.async = true;
-			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-		}()); 
-	});
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-
-
-
-
-</div>
+        <div class="herofade beige-dk"></div>
     </div>
 </section>
 
+<!-- Height spacing helper -->
+<div class="heightblock"></div>
+<!-- // End height spacing helper -->
 
+<!-- ============================ END Hero Image =========================== -->
+
+
+
+
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row boxes">
+                    
+                    
+                        
+                        
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
+                            
+                              <h4 class="title"><a href="/2018/07/15/Analyze-the-Process-of-Setting-KeyboardLayout-for-Physical-Keyboard/">Analyze the Process of Setting kl for Physical Keyboard</a></h4>
+                            
+                            <p><time datetime="2018-07-15T08:19:24.000Z"><a href="/2018/07/15/Analyze-the-Process-of-Setting-KeyboardLayout-for-Physical-Keyboard/">2018-07-15</a></time></p>
+                        </div>
+                    
+                </div>
+            </div>    
+        </div>
+    </div>
+</section> 
+
+<section id="statement">
+    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
+        <div class="row">
+            <p>Be humble, sit down..</p>
+        </div>
+    </div>
+</section>
       
 <!-- ============================ Footer =========================== -->
 
