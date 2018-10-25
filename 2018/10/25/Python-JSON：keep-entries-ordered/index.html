@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Category: Life Itself | Lynette&#39;s Blog</title>
+  <title>Python Json：Keep Entries Ordered | Lynette&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -52,6 +52,8 @@
     <![endif]-->
 
   
+  <link rel="amphtml" href="http://lynettez.github.io/2018/10/25/Python-JSON：keep-entries-ordered//amp/index.html">
+  
   
   
   <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
@@ -62,7 +64,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -161,69 +163,71 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/dp_bg.png) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2></h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p></p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2018/06/30/冥想练习/">冥想练习</a></h4>
-                            
-                            <p><time datetime="2018-06-30T00:31:21.000Z"><a href="/2018/06/30/冥想练习/">2018-06-30</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-10-25T07:20:06.000Z" itemprop="datePublished">
+          2018-10-25
+      </time>
+    
+</span>
+                <h1>Python Json：Keep Entries Ordered</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<blockquote>
+<p>If you want to maintain an order dictionary with json file in Python, this post might help.</p>
+</blockquote>
+<h3 id="1-Ordered-Dictionary"><a href="#1-Ordered-Dictionary" class="headerlink" title="1. Ordered Dictionary"></a>1. Ordered Dictionary</h3><p>As we known, Python dictionaries are unordered, but we got OrderedDict.</p>
+<p>First of all, we have to use that to make sure the given dict is ordered.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from collections import OrderedDict</span><br><span class="line">givendict = OrderedDict()</span><br><span class="line">givendict[&quot;key&quot;] = &quot;val&quot;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="2-Json-dumps"><a href="#2-Json-dumps" class="headerlink" title="2. Json.dumps()"></a>2. Json.dumps()</h3><p>If we give the ordered dict to json.dumps() directly, the fields in that json file are still in the wrong order.<br>A simple way to preserving the order of a mappling in JSON is:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Json.dumps([givendict])</span><br></pre></td></tr></table></figure></p>
+<p>The content of the json file will be like:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#123;&quot;key&quot;: &quot;val&quot;&#125;]</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="3-Remove-from-the-json-file"><a href="#3-Remove-from-the-json-file" class="headerlink" title="3. Remove [] from the json file"></a>3. Remove [] from the json file</h3><p>When we tried to load the data from json file, we have to remove the “[]” firstly.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chars = &quot;[]&quot;</span><br><span class="line">for ch in chars：</span><br><span class="line">    if ch in data:</span><br><span class="line">        data = data.replace(ch, &quot;&quot;)</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="4-Json-loads"><a href="#4-Json-loads" class="headerlink" title="4. Json.loads()"></a>4. Json.loads()</h3><p>Now it’s time to load the data, but the json.loads will still mess up order if you didn’t add the arg as below:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">json.loads(data, object_pairs_hook=OrderedDict)</span><br></pre></td></tr></table></figure></p>
+<hr>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>Be humble, sit down..</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
+    
+    
+    <a class="pull-right" href="/2018/07/17/Android-Power-Reset-Reasons/">
+        Android Power Reset Reasons →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'dogbird';
+	window.addEventListener('load', function(){
+		(function(){
+			var dsq = document.createElement('script');
+			dsq.type = 'text/javascript';
+			dsq.async = true;
+			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}()); 
+	});
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
