@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Android Power Reset Reasons | Lynette&#39;s Blog</title>
+  <title>Archives | Lynette&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -52,8 +52,6 @@
     <![endif]-->
 
   
-  <link rel="amphtml" href="http://lynettez.github.io/2018/07/17/Android-Power-Reset-Reasons//amp/index.html">
-  
   
   
   <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
@@ -64,7 +62,7 @@
 </head>
 
 <!--
-<body class="post-template">
+<body class="home-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -165,78 +163,69 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      
-<section id="intro">
-    <div class="container">
-        <div class="row col-md-offset-2">
-            <div class="col-md-8">
-    			<span class="post-meta">
-      <time datetime="2018-07-17T10:32:53.000Z" itemprop="datePublished">
-          2018-07-17
-      </time>
-    
-</span>
-                <h1>Android Power Reset Reasons</h1>
+      <!-- ============================ Hero Image =========================== -->
+
+<section id="hero" class="scrollme">
+    <div class="container-fluid element-img" style="background: url(/img/dp_bg.png) no-repeat center center fixed;background-size: cover">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                    <div>
+                        
+                        <h2></h2>
+                        <p></p>
+                        
+                        <h2></h2>
+                        <p></p>
+                        
+
+                    </div>
+                </div>
             </div>
+            <!-- // .col-md-12 -->
         </div>
-        <div class="col-md-8 col-md-offset-2">
-      		<blockquote>
-<p>解析bugreport，根据不同的log分析Android重启的原因</p>
-</blockquote>
-<h3 id="1-Normal-reset"><a href="#1-Normal-reset" class="headerlink" title="1. Normal reset"></a>1. Normal reset</h3><p>这种情况是最简单的，我们可以查看LAST_KMSG的最后一行，就可以得到相应的重启原因。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Restarting system with command: ***</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>如果为空，原因应为 adb reboot</li>
-<li>如果是 bootloader， 原因应为 fastboot reboot</li>
-<li>如果是其他明确的command， 可以按字面意思理解其原因</li>
-</ul>
-<h3 id="2-Random-reboot"><a href="#2-Random-reboot" class="headerlink" title="2. Random reboot"></a>2. Random reboot</h3><p>这种情况就是系统出错导致的重启。可以按一下四种情况去诊断其重启原因。<br>一般分为两个层面的重启，一种是hard reboot，一般是kernel 或者 radio-level的错误导致重启；另一种是在kernel正常运行的情况下Android runtime的重启，可能是由Deadlock，System server process crash或native crash导致的。</p>
-<h4 id="2-1-Kernel-panic"><a href="#2-1-Kernel-panic" class="headerlink" title="2.1 Kernel panic"></a>2.1 Kernel panic</h4><p>诊断是否有kernel panic， 可以check kernel logs里是否有如下log<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[  424.909515] Kernel panic - not syncing: Fatal exception</span><br><span class="line">[  424.909606] Backtrace: </span><br><span class="line">[  424.909790] [&lt;c005a5ec&gt;] (dump_backtrace+0x0/0x10c) from [&lt;c05f38dc&gt;] (dump_stack+0x18/0x1c)</span><br><span class="line">[  424.909973]  r6:c5cccf00 r5:00000000 r4:c08505a0 r3:00000000</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-2-Radio-side-problem"><a href="#2-2-Radio-side-problem" class="headerlink" title="2.2 Radio-side problem"></a>2.2 Radio-side problem</h4><p>Radio level的错误可以查看LAST_KMSG中是否有如下log<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[  535.383270] ARM9 has CRASHED</span><br><span class="line">[  535.383666] smem: DIAG &apos;MOD SM-TM   00000</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-3-Deadlock"><a href="#2-3-Deadlock" class="headerlink" title="2.3 Deadlock"></a>2.3 Deadlock</h4><p>死锁的error log如下，可以从EVENT_LOG或者SYSTEM_LOG中查找。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">04-04 14:06:16.888   885  1089 W Watchdog: *** WATCHDOG KILLING SYSTEM PROCESS: null</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-4-System-server-process-crash"><a href="#2-4-System-server-process-crash" class="headerlink" title="2.4 System server process crash"></a>2.4 System server process crash</h4><p>log如下，也是从EVENT_LOG或者SYSTEM_LOG中查找。关键字：<br>*** FATAL EXCEPTION IN SYSTEM PROCESS</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">01-01 12:45:11.950 E/AndroidRuntime( 4429): *** FATAL EXCEPTION IN SYSTEM PROCESS: main</span><br></pre></td></tr></table></figure>
-<h4 id="2-5-Native-crash"><a href="#2-5-Native-crash" class="headerlink" title="2.5 Native crash"></a>2.5 Native crash</h4><p>Native crash的log都是从一行星号开始, 可以作为标志去SYSTEM_LOG中查找。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880): *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***</span><br><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880): Build fingerprint: &apos;verizon/voles/sholes/sholes:2.2.2/FRG83G/91102:user/release-keys&apos;</span><br><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880): pid: 2893, tid: 2894  &gt;&gt;&gt; com.gnychis.coexisyst &lt;&lt;&lt;</span><br><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880): signal 11 (SIGSEGV), fault addr 2d4eedb4</span><br><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880):  r0 2d4eeda4  r1 00000000  r2 00000024  r3 00000000</span><br><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880):  r4 00d3e770  r5 00000000  r6 4184ff98  r7 4184ffa4</span><br><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880):  r8 100ffad0  r9 4184ff9c  10 4184ff84  fp 100ffe30</span><br><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880):  ip 85b7efec  sp 100ffa88  lr 845d13f8  pc 845f8c38  cpsr 60000010</span><br><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880):  d0  6472656767756265  d1  4472fb3844714069</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-
-            <div class="clearfix"></div>
-            <hr class="nogutter">
-        </div>
-        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
-    
-    <a class="pull-left" href="/2018/10/25/Python-JSON：keep-entries-ordered/" style="float: left;">
-        ← Python Json：Keep Entries Ordered
-    </a>
-    
-    
-    <a class="pull-right" href="/2018/07/15/Analyze-the-Process-of-Setting-KeyboardLayout-for-Physical-Keyboard/">
-        Analyze the Process of Setting KL for Physical Keyboard →
-    </a>
-    
-</nav>
-
-        <div class="duoshuo">
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-	var disqus_shortname = 'dogbird';
-	window.addEventListener('load', function(){
-		(function(){
-			var dsq = document.createElement('script');
-			dsq.type = 'text/javascript';
-			dsq.async = true;
-			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-		}()); 
-	});
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-
-
-
-
-</div>
+        <div class="herofade beige-dk"></div>
     </div>
 </section>
 
+<!-- Height spacing helper -->
+<div class="heightblock"></div>
+<!-- // End height spacing helper -->
 
+<!-- ============================ END Hero Image =========================== -->
+
+
+
+
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row boxes">
+                    
+                    
+                        
+                        
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
+                            
+                              <h4 class="title"><a href="/2018/06/18/Start-with-Hexo/">Start with Hexo</a></h4>
+                            
+                            <p><time datetime="2018-06-18T03:12:25.000Z"><a href="/2018/06/18/Start-with-Hexo/">2018-06-18</a></time></p>
+                        </div>
+                    
+                </div>
+            </div>    
+        </div>
+    </div>
+</section> 
+
+<section id="statement">
+    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
+        <div class="row">
+            <p>Be humble, sit down..</p>
+        </div>
+    </div>
+</section>
       
 <!-- ============================ Footer =========================== -->
 

@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Android Power Reset Reasons | Lynette&#39;s Blog</title>
+  <title>SEOUL 让人变精致的城市 | Lynette&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -52,7 +52,7 @@
     <![endif]-->
 
   
-  <link rel="amphtml" href="http://lynettez.github.io/2018/07/17/Android-Power-Reset-Reasons//amp/index.html">
+  <link rel="amphtml" href="http://lynettez.github.io/2019/04/08/SEOUL//amp/index.html">
   
   
   
@@ -171,44 +171,43 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2018-07-17T10:32:53.000Z" itemprop="datePublished">
-          2018-07-17
+      <time datetime="2019-04-08T12:00:41.000Z" itemprop="datePublished">
+          2019-04-08
       </time>
     
 </span>
-                <h1>Android Power Reset Reasons</h1>
+                <h1>SEOUL 让人变精致的城市</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
       		<blockquote>
-<p>解析bugreport，根据不同的log分析Android重启的原因</p>
+<p>仁川机场，坐在我们对面的老夫妇，一边吃汉堡一边开心的聊天，老奶奶深灰色的头发蓬松的很好看，末了，老奶奶拿出粉饼和口红补好妆，牵着老爷爷的手走了。<br>我和同行的朋友 同时感叹了一句：好精致啊~</p>
 </blockquote>
-<h3 id="1-Normal-reset"><a href="#1-Normal-reset" class="headerlink" title="1. Normal reset"></a>1. Normal reset</h3><p>这种情况是最简单的，我们可以查看LAST_KMSG的最后一行，就可以得到相应的重启原因。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Restarting system with command: ***</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>如果为空，原因应为 adb reboot</li>
-<li>如果是 bootloader， 原因应为 fastboot reboot</li>
-<li>如果是其他明确的command， 可以按字面意思理解其原因</li>
-</ul>
-<h3 id="2-Random-reboot"><a href="#2-Random-reboot" class="headerlink" title="2. Random reboot"></a>2. Random reboot</h3><p>这种情况就是系统出错导致的重启。可以按一下四种情况去诊断其重启原因。<br>一般分为两个层面的重启，一种是hard reboot，一般是kernel 或者 radio-level的错误导致重启；另一种是在kernel正常运行的情况下Android runtime的重启，可能是由Deadlock，System server process crash或native crash导致的。</p>
-<h4 id="2-1-Kernel-panic"><a href="#2-1-Kernel-panic" class="headerlink" title="2.1 Kernel panic"></a>2.1 Kernel panic</h4><p>诊断是否有kernel panic， 可以check kernel logs里是否有如下log<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[  424.909515] Kernel panic - not syncing: Fatal exception</span><br><span class="line">[  424.909606] Backtrace: </span><br><span class="line">[  424.909790] [&lt;c005a5ec&gt;] (dump_backtrace+0x0/0x10c) from [&lt;c05f38dc&gt;] (dump_stack+0x18/0x1c)</span><br><span class="line">[  424.909973]  r6:c5cccf00 r5:00000000 r4:c08505a0 r3:00000000</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-2-Radio-side-problem"><a href="#2-2-Radio-side-problem" class="headerlink" title="2.2 Radio-side problem"></a>2.2 Radio-side problem</h4><p>Radio level的错误可以查看LAST_KMSG中是否有如下log<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[  535.383270] ARM9 has CRASHED</span><br><span class="line">[  535.383666] smem: DIAG &apos;MOD SM-TM   00000</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-3-Deadlock"><a href="#2-3-Deadlock" class="headerlink" title="2.3 Deadlock"></a>2.3 Deadlock</h4><p>死锁的error log如下，可以从EVENT_LOG或者SYSTEM_LOG中查找。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">04-04 14:06:16.888   885  1089 W Watchdog: *** WATCHDOG KILLING SYSTEM PROCESS: null</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-4-System-server-process-crash"><a href="#2-4-System-server-process-crash" class="headerlink" title="2.4 System server process crash"></a>2.4 System server process crash</h4><p>log如下，也是从EVENT_LOG或者SYSTEM_LOG中查找。关键字：<br>*** FATAL EXCEPTION IN SYSTEM PROCESS</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">01-01 12:45:11.950 E/AndroidRuntime( 4429): *** FATAL EXCEPTION IN SYSTEM PROCESS: main</span><br></pre></td></tr></table></figure>
-<h4 id="2-5-Native-crash"><a href="#2-5-Native-crash" class="headerlink" title="2.5 Native crash"></a>2.5 Native crash</h4><p>Native crash的log都是从一行星号开始, 可以作为标志去SYSTEM_LOG中查找。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880): *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***</span><br><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880): Build fingerprint: &apos;verizon/voles/sholes/sholes:2.2.2/FRG83G/91102:user/release-keys&apos;</span><br><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880): pid: 2893, tid: 2894  &gt;&gt;&gt; com.gnychis.coexisyst &lt;&lt;&lt;</span><br><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880): signal 11 (SIGSEGV), fault addr 2d4eedb4</span><br><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880):  r0 2d4eeda4  r1 00000000  r2 00000024  r3 00000000</span><br><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880):  r4 00d3e770  r5 00000000  r6 4184ff98  r7 4184ffa4</span><br><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880):  r8 100ffad0  r9 4184ff9c  10 4184ff84  fp 100ffe30</span><br><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880):  ip 85b7efec  sp 100ffa88  lr 845d13f8  pc 845f8c38  cpsr 60000010</span><br><span class="line">07-28 11:31:21.675: INFO/DEBUG(2880):  d0  6472656767756265  d1  4472fb3844714069</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://wx1.sinaimg.cn/mw690/86f78075gy1g1s93q1v2lj20u0140wnm.jpg" alt="N|Solid"></p>
+<hr>
+<h3 id="购物篇"><a href="#购物篇" class="headerlink" title="购物篇"></a>购物篇</h3><p>我们这次因为时间有限，所以把所有时间都花在了shopping上，护肤品，彩妆，衣服，鞋子，面膜，奢饰品，小电器，IQOS，全部可以买到，除非你要买的是断货王。</p>
+<p>购物一般不需要起早，明洞乐天免税店十一点才开门，建议先去十楼办张临时金卡，如果你真的去办了你会感谢我的:D</p>
+<p><strong>护肤品，面膜</strong>，在乐天里折扣还是很可以的，我买的兰蔻安瓶倒是比新罗机场店贵一些，所以都不是绝对的，可以下载各大免税店的APP，提前查一下要买的东西，会变得更理智的，减少冲动消费的概率，用划算的价格买到想要的东西，真的会让人很开心(手动捂脸)</p>
+<p>如果不买特别多特别沉的东西建议去<strong>机场免税店</strong>扫货，当然你要提前一些去机场，这样才有时间提货，扫货，仁川机场免税店的规模是北京T3的好几倍，因为新罗，新世界，乐天都在机场里，有的逛呢..</p>
+<p><strong>鞋</strong>的话 做过攻略的都会知道一家韩国本土鞋店<em>SAPPUN</em>，他们家的鞋确实很好看，穿起来也很舒服，而且很便宜.. 弘大，林荫路都有店。弘大明洞还有很多专门卖运动鞋的大店，没有特比想要的款就不需要浪费时间在这里了。最后悔没有去逛New Balance，他们家新出的这款我超喜欢，后悔啊后悔<br><img src="https://wx2.sinaimg.cn/mw690/86f78075ly1g1vfqhwjy0j211i0p0tic.jpg" alt="N|Solid"></p>
+<p><strong>SJYP</strong>的小恐龙 还有购物袋也超好看 虽然不便宜但是买了之后超开心, 位置在林荫路，这里还有MLB和IQOS，MLB里面的T恤都超好看，逛江南真的不会像弘大和明洞那样到处都是人，很清静<br><img src="https://wx1.sinaimg.cn/mw690/86f78075ly1g1ujqpf93wj20u00u0h58.jpg" alt="N|Solid"></p>
+<p>明洞地铁站在南山脚下，旁边就有一家很大的北面，后悔没有去 &gt;-&lt;</p>
+<hr>
+<h3 id="美食篇"><a href="#美食篇" class="headerlink" title="美食篇"></a>美食篇</h3><p>我们酒店在弘大，先给一个坐标：弘大入口站1号出口出右拐直走看到第一个十字路口，就是Line Friend店门口的路口，下面的美食都在这周边，<br><strong>白老师杂酱面(香港饭店0410)</strong>  味道很中肯，比国内好吃一倍吧，没有特别惊喜，海鲜面点的正常的，一点都不辣，汤超级好喝。<br><img src="https://wx1.sinaimg.cn/mw690/86f78075gy1g1rdkbl7llj22c0340e82.jpg" alt="N|Solid"><br>Line Friend店对面有一家小小的CU便利店，可以买到李东旭的W茶和<strong>新西游记</strong>的玩偶造型的饮料，门口的路边摊里小鱼饼超级好吃！！！<br><img src="https://wx3.sinaimg.cn/mw690/86f78075ly1g1vgfj4uk0j20u00u0age.jpg" alt="N|Solid"><br>附近的<strong>桥村炸鸡</strong>也是真的太太太好吃了，好想念那个味道，我们吃的有骨的炸全鸡，炸衣特别脆，鸡肉熟的刚刚好而且肉质很嫩， 凉了都好吃的炸鸡，真的跟望京的不一样！</p>
+<p>还有就是十字路口附近的一家<strong>烤肉</strong>店，牛肉吃起来嫩嫩的香香的，冷面很细是我喜欢的细面，酱料也非常好吃，我们都被牛肉和冷面折服了，而且感觉被国内的韩餐深深的欺骗了，为什么国内的冷面这么粗。。<br><img src="https://wx2.sinaimg.cn/mw690/86f78075ly1g1vgiqr88xj20u00u0n8r.jpg" alt="N|Solid"></p>
+<p>还有<strong>弘大酱蟹</strong>，很有名的店，大众点评就可以搜到，注意他们家是一人选一个套餐，然后无限续添，不是一道菜一道菜的点，还有就是吃不了腥味的就不要浪费人家的肥蟹了，最后一句也是说给我们俩的听得，因为我们是有点吃不惯生的蟹和吓。。</p>
+<p>下一站明洞，我们第一餐吃了<strong>章鱼锅和章鱼拌饭</strong>，活章鱼在锅里慢慢被煮熟。。有点残忍，但是，但是煮好之后的汤特别特别好喝..<br>第二餐是<strong>元祖南山王炸猪排</strong>，请回答1988里看他们吃炸猪排的时候，就在想象这个味道，结果真的是我想象的味道，巨好吃，每一桌上有一个铁盒，里面是萝卜块，配着猪排吃很解腻，真的超好吃！<br><img src="https://wx1.sinaimg.cn/mw690/86f78075gy1g1s93ss3y8j22c03407wi.jpg" alt="N|Solid"></p>
+<hr>
+<h3 id="为什么说首尔会让人变精致呢"><a href="#为什么说首尔会让人变精致呢" class="headerlink" title="为什么说首尔会让人变精致呢"></a>为什么说首尔会让人变精致呢</h3><p>不仅是因为有护肤品和衣服的加持，我觉得还有一种生活的态度吧，不管你什么职业，什么年龄，至少需要每天爱护自己，用心去对待自己爱自己，如果你连自己的外在都不用心，那你的内在呢？<br>所以我想做一个<strong>精致</strong>的人，每天用最开心的心情去过每一分钟，用最自信的形象去面对世界<br><img src="https://wx3.sinaimg.cn/mw690/86f78075ly1g1vfqhnso1j20u10u0468.jpg" alt="N|Solid"></p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
     
-    <a class="pull-left" href="/2018/10/25/Python-JSON：keep-entries-ordered/" style="float: left;">
-        ← Python Json：Keep Entries Ordered
-    </a>
     
-    
-    <a class="pull-right" href="/2018/07/15/Analyze-the-Process-of-Setting-KeyboardLayout-for-Physical-Keyboard/">
-        Analyze the Process of Setting KL for Physical Keyboard →
+    <a class="pull-right" href="/2019/03/14/Phuket/">
+        Phuket之旅 →
     </a>
     
 </nav>
