@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lynettez.github.io/"/>
-  <updated>2019-04-08T12:12:10.732Z</updated>
+  <updated>2020-02-04T03:26:34.655Z</updated>
   <id>http://lynettez.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>DNN Training Notes</title>
+    <link href="http://lynettez.github.io/2020/02/04/DNN-Training-Notes/"/>
+    <id>http://lynettez.github.io/2020/02/04/DNN-Training-Notes/</id>
+    <published>2020-02-04T03:14:18.000Z</published>
+    <updated>2020-02-04T03:26:34.655Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>摘自 《基于深度学习的自然语言处理》</p></blockquote><h3 id="梯度消失与梯度爆炸"><a href="#梯度消失与梯度爆炸" class="headerlink" title="梯度消失与梯度爆炸"></a>梯度消失与梯度爆炸</h3><p>在深层网络中，因为梯度通过图反向传播回来，错误梯度是非常常见的， 要么梯度消失(变得非常接近0)，要么梯度爆炸(变得非常高)。在更深的网络中，这个问题变得更加严重，尤其是在递归和RNN中。处理梯度消失问题仍然是一个开放的研究问题。 解决办法有让网络变浅，逐步训练使用Batch-normalization方法，或者使用特定的结构去帮助梯度流动(如LSTM和GRU)。处理梯度爆炸有一个简单但是高效的办法：如果它们的范数超过给定的阈值就裁减掉。</p><hr><h3 id="饱和神经元和死神经元"><a href="#饱和神经元和死神经元" class="headerlink" title="饱和神经元和死神经元"></a>饱和神经元和死神经元</h3><p>带有tanh和sigmoid激活函数的网络层往往容易饱和—造成该层的输出都接近于1，这是激活函数的上界。饱和神经元具有很小的梯度，所以可以避免。带有ReLU激活函数的网络层不会饱和，但是会死掉—大部分甚至多有的值都是负值，因此对于所有的输入来说都裁剪为0，从而导致该层的梯度全为0。如果你的网络没有训练好，检查网络层的饱和神经元与死神经元是明智的。<br>饱和神经元是由值太大的输入层造成的。这可以通过更改初始化、缩放输入值的范围或者改变学习速率来控制。<br>死神经元是由进入网络层的负值引起的，减少学习率将减缓这种现象。<br>归一化是对抗饱和神经元的有效方法，但是在梯度计算过程中代价较大，一个相关的技巧为batch normalization。在计算机视觉中，BN已经成为深层网络训练一个关键的组成部分。在自然语言处理应用中， 它并没有那么受欢迎。</p><hr><h3 id="学习率"><a href="#学习率" class="headerlink" title="学习率"></a>学习率</h3><p>太大的学习率会阻止网络收敛到一个有效的解，太小的学习率则需要长时间来收敛。一个经验法则，实验应该从范围[0.1]内尝试初始学习率，比如0.001，0.01，0.1，1。观测网络的loss值， 一旦loss值在开发集上停止改进，则降低学习率。<br>学习率可以看做minibatch数量的函数。一个常见的表示是将初始速率除以迭代次数。</p><hr><h3 id="minibatch"><a href="#minibatch" class="headerlink" title="minibatch"></a>minibatch</h3><p>在每个训练样例(minibatch大小为1)或者每k个训练样例训练结束后更新参数。大的minibatch训练对有些问题是有益的。GPU对大的minibatch数据训练也有帮助，通过矩阵运算来取代矩阵向量运算。</p><p>Training时，计算梯度并存储在相应的参数中，再通过梯度进行参数更新</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;摘自 《基于深度学习的自然语言处理》&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;梯度消失与梯度爆炸&quot;&gt;&lt;a href=&quot;#梯度消失与梯度爆炸&quot; class=&quot;headerlink&quot; title=&quot;梯度消失与梯度爆炸&quot;&gt;&lt;/a&gt;梯度消失与梯
+      
+    
+    </summary>
+    
+      <category term="DL" scheme="http://lynettez.github.io/categories/DL/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>SEOUL 让人变精致的城市</title>
