@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lynettez.github.io/"/>
-  <updated>2020-02-04T03:26:34.655Z</updated>
+  <updated>2020-02-05T14:05:33.643Z</updated>
   <id>http://lynettez.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RNN Notes</title>
+    <link href="http://lynettez.github.io/2020/02/05/RNN-Notes/"/>
+    <id>http://lynettez.github.io/2020/02/05/RNN-Notes/</id>
+    <published>2020-02-05T13:58:28.000Z</published>
+    <updated>2020-02-05T14:05:33.643Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简单RNN-S-RNN"><a href="#简单RNN-S-RNN" class="headerlink" title="简单RNN (S-RNN)"></a>简单RNN (S-RNN)</h2><p>对序列中元素顺序敏感的最简单的RNN形式称为Elman RNN或者简单RNN(S-RNN), S-RNN由Elman[1990]提出， 并由Mikolov[2012]用于探索在语言模型中的应用。<br>在其递归函数R里，状态s<sub>i-1</sub> 和输入x<sub>i</sub>分别线性变换， 结果相加(连同一个偏置项)， 然后通过一个非线性的激活函数g(通常是tanh或者ReLU)。确定性函数O：位置i的输出与这个未知的隐藏状态相同。<br>因为加入线性变换后跟随非线性变换的机制使得网络结构服与序列顺序敏感。实际上，S-RNN在序列标注问题以及语言模型上取得了很好的结果。</p><h2 id="门结构"><a href="#门结构" class="headerlink" title="门结构"></a>门结构</h2><p>因为梯度消失的问题，S-RNN很难有效地训练。误差信号(梯度)在反向传播过程中到达序列的后面部分是迅速减少，以至于无法到达先前的输入信号的位置，这导致S-RNN难以捕捉到长距离以来信息。因此，LTSM和GRU等基于门的结构被设计出来， 用以解决这一问题。</p><p>考虑将RNN视为一个通用的计算工具，其中的状态s<sub>i</sub>代表一个有限的记忆。每一种R函数的实现都会读入一个输入x<sub>i+1</sub>以及当前的记忆s<sub>i</sub>， 对它们进行某种操作，并将结果写入记忆得到新的记忆状态s<sub>i+1</sub>。从这种方式看来，S-RNN的一个明显的问题在于记忆的获取是不受控制的。在每一步的计算过程中，整个记忆状态都被读入，并且整个记忆状态也被改写。<br>那么如何一种更加受控的记忆读写方式？这是引入使用二进制门向量g控制记忆s的读写。这种门机制可以作为构建新RNN的基本模块：门向量能够控制记忆状态s的读写。然而门不应该是静态的，二应该是由当前的记忆状态和输入共同控制，并且应该从输入状态和记忆中进行学习，这就需要一个可微的门机制来支持学习的过程。<br>为了实现可微的门，我们允许g使用任意实数值，这个实数值随后通过一个sigmoid函数。将数值限定在(0,1)区间内，并且大多数只都在接近边界的位置，而接近0的那些下标则被阻拦。门的取值可以通话输入和目前的记忆来决定，并且能够通过使用基于梯度下降的方式来训练一个性能令人满意的网络。<br>受控的门机制是下面将要定义的LSTM和GRU的结构的基础：在每个时间片上，可微的门机制决定哪一部分记忆会被写入，以及哪一部分被覆盖(忘记)。这里相当抽象的描述将会在后续部分给出更直观的解释。</p><h3 id="长短期记忆网络-LSTM"><a href="#长短期记忆网络-LSTM" class="headerlink" title="长短期记忆网络(LSTM)"></a>长短期记忆网络(LSTM)</h3><p>LSTM(1997)被设计用于解决梯度消失的问题，并且是第一种引入门机制的结构。LSTM结构明确地将状态向量s<sub>i</sub>分解为两部分，一般称为“记忆单元”，另一半是运行记忆。记忆单元被设计用来保存跨时间的记忆以及梯度信息， 同时受控于可微门组件——模拟逻辑门的平滑数学函数。在每一个输入状态上，一个门被用来决定由多少新的输入加入记忆单元， 以及记忆单元中现有的多少记忆应该被忘记。<br>在训练LSTM网络的时候 Jozefowicz等人[2015]强烈建议将遗忘门的偏置项设置为接近1的值</p><h3 id="门限循环单元-GRU"><a href="#门限循环单元-GRU" class="headerlink" title="门限循环单元(GRU)"></a>门限循环单元(GRU)</h3><p>LSTM是一种很有效的结构，同时也十分复杂。结构的复杂性使得LSTM难以分析，同时计算代价也比较高，GRU[2014]是一种LSTM的替代方案，总体上它使用了更少的门并且没有单独的记忆组件。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;简单RNN-S-RNN&quot;&gt;&lt;a href=&quot;#简单RNN-S-RNN&quot; class=&quot;headerlink&quot; title=&quot;简单RNN (S-RNN)&quot;&gt;&lt;/a&gt;简单RNN (S-RNN)&lt;/h2&gt;&lt;p&gt;对序列中元素顺序敏感的最简单的RNN形式称为Elman RN
+      
+    
+    </summary>
+    
+      <category term="DL" scheme="http://lynettez.github.io/categories/DL/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>DNN Training Notes</title>
